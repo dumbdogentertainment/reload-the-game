@@ -14,14 +14,10 @@
 
         public GameObject shellPrefab;
         private Projectile towerProjectile;
-        //public float fireRate = 0.5f;
         public float fireCooldown;
-        //public float fireCost = 1.5f;
 
         Transform turretTransform;
         Transform muzzleTransform;
-
-        public Enemy[] currentTargets;
 
         void Awake()
         {
@@ -37,12 +33,10 @@
 
         void Update()
         {
-            Debug.DrawRay(
-            this.turretTransform.position,
-            this.turretTransform.TransformDirection(Vector3.back) * 5,
-            Color.red);
-
-            this.currentTargets = GameObject.FindObjectsOfType<Enemy>();
+            //Debug.DrawRay(
+            //this.turretTransform.position,
+            //this.turretTransform.TransformDirection(Vector3.back) * 5,
+            //Color.red);
 
             FireAtTargets(GameObject.FindObjectsOfType<Enemy>());
             Recharge();
@@ -66,16 +60,21 @@
         {
             this.fireCooldown -= Time.deltaTime;
 
-            if (false == enemies.Any())
+            Enemy[] enemiesInRange = enemies
+                .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, 6.5f))
+                .OrderBy(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position))
+                .ToArray();
+
+            if (false == enemiesInRange.Any())
             {
                 return;
             }
 
-            // current target is closest enemy in range (min, max)
-            Enemy currentTarget = enemies.FirstOrDefault();
+            // current target is closest enemy in range (3.5, 6.5)
+            Enemy currentTarget = enemiesInRange.FirstOrDefault();
 
             // look at current target
-            Vector3 lookDirection = this.currentTargets.FirstOrDefault().transform.position - this.turretTransform.position;
+            Vector3 lookDirection = currentTarget.transform.position - this.turretTransform.position;
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection * -1);
 
             this.turretTransform.rotation = Quaternion.Euler(
