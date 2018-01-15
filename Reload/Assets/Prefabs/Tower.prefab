@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4556219295695428}
+  - component: {fileID: 114236155604460242}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -343,6 +344,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114236155604460242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465476374370000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45cb3373683b8649a0057bf1afcdf83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnergy: 100
+  currentEnergy: 0
+  energyRechargeRate: 1
+  energyRechargeAmount: 2
+  energyRechargeCooldown: 0
+  shellPrefab: {fileID: 1879843366361220, guid: b40f6fb096db4aa48b2867982b06aad6,
+    type: 2}
+  fireRate: 0.5
+  fireCooldown: 0
 --- !u!135 &135080137942577986
 SphereCollider:
   m_ObjectHideFlags: 1
