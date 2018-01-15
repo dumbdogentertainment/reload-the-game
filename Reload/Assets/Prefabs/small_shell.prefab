@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1879843366361220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.188, z: -1.393}
+  m_LocalPosition: {x: 0, y: 1.188, z: -1.655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4831533932649712}
@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeUntilDestroy: 2
+  projectile: {fileID: 11400000, guid: 7187de1869627f344a81e82074dcbd60, type: 2}
+  target: {x: 0, y: 0, z: 0}
 --- !u!136 &136075928898351956
 CapsuleCollider:
   m_ObjectHideFlags: 1

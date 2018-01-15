@@ -1,5 +1,6 @@
 ﻿namespace DumbDogEntertainment
 {
+    using System;
     using System.Linq;
     using UnityEngine;
 
@@ -12,9 +13,10 @@
         public float energyRechargeCooldown;
 
         public GameObject shellPrefab;
-        public float fireRate = 0.5f;
+        private Projectile towerProjectile;
+        //public float fireRate = 0.5f;
         public float fireCooldown;
-        public float fireCost = 1.5f;
+        //public float fireCost = 1.5f;
 
         Transform turretTransform;
         Transform muzzleTransform;
@@ -28,7 +30,9 @@
 
             this.turretTransform = transform.Find("turret");
             this.muzzleTransform = this.turretTransform.Find("barrel").Find("muzzle");
-            this.fireCooldown = this.fireRate;
+
+            this.towerProjectile = this.shellPrefab.GetComponent<ShellBehavior>().projectile;
+            this.fireCooldown = this.towerProjectile.rateOfFire;
         }
 
         void Update()
@@ -40,47 +44,59 @@
 
             this.currentTargets = GameObject.FindObjectsOfType<Enemy>();
 
-            if(this.currentTargets.Any())
-            {
-                Vector3 lookDirection = this.currentTargets.FirstOrDefault().transform.position - this.turretTransform.position;
-                Quaternion lookRotation = Quaternion.LookRotation(lookDirection * -1);
+            FireAtTargets(GameObject.FindObjectsOfType<Enemy>());
+            Recharge();
+        }
 
-                this.turretTransform.rotation = Quaternion.Euler(
-                    lookRotation.eulerAngles.x,
-                    lookRotation.eulerAngles.y,
-                    this.turretTransform.rotation.eulerAngles.z);
-            }
-
-            #region Recharge
-
-            if (this.energyRechargeCooldown <= 0)
-            {
-                this.currentEnergy += this.energyRechargeRate;
-                this.currentEnergy = Mathf.Clamp(this.currentEnergy, 0f, this.maxEnergy);
-                this.energyRechargeCooldown = this.energyRechargeRate;
-            }
-
+        private void Recharge()
+        {
             this.energyRechargeCooldown -= Time.deltaTime;
 
-            #endregion
-
-            if (this.fireCooldown <= 0 && this.currentEnergy >= this.fireCost)
+            if (this.energyRechargeCooldown > 0)
             {
-                ////GameObject shellGameObject = (GameObject)Instantiate(
-                ////    this.shellPrefab,
-                ////    muzzleTransform.position,
-                ////    muzzleTransform.rotation);
-
-                Instantiate(
-                    this.shellPrefab,
-                    muzzleTransform.position,
-                    muzzleTransform.rotation);
-
-                this.currentEnergy -= this.fireCost;
-                this.fireCooldown = this.fireRate;
+                return;
             }
 
+            this.currentEnergy += this.energyRechargeRate;
+            this.currentEnergy = Mathf.Clamp(this.currentEnergy, 0f, this.maxEnergy);
+            this.energyRechargeCooldown = this.energyRechargeRate;
+        }
+
+        private void FireAtTargets(Enemy[] enemies)
+        {
             this.fireCooldown -= Time.deltaTime;
+
+            if (false == enemies.Any())
+            {
+                return;
+            }
+
+            // current target is closest enemy in range (min, max)
+            Enemy currentTarget = enemies.FirstOrDefault();
+
+            // look at current target
+            Vector3 lookDirection = this.currentTargets.FirstOrDefault().transform.position - this.turretTransform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(lookDirection * -1);
+
+            this.turretTransform.rotation = Quaternion.Euler(
+                lookRotation.eulerAngles.x,
+                lookRotation.eulerAngles.y,
+                this.turretTransform.rotation.eulerAngles.z);
+
+            // fire at current target
+            if (this.fireCooldown <= 0 && this.currentEnergy >= this.towerProjectile.costToFire)
+            {
+                GameObject shellGameObject = (GameObject)Instantiate(
+                    this.shellPrefab,
+                    this.muzzleTransform.position,
+                    this.muzzleTransform.rotation);
+
+                Projectile firedProjectile = shellGameObject.GetComponent<ShellBehavior>().projectile;
+                firedProjectile.targetPosition = currentTarget.transform.localPosition;
+
+                this.currentEnergy -= this.towerProjectile.costToFire;
+                this.fireCooldown = this.towerProjectile.rateOfFire;
+            }
         }
     }
 }
