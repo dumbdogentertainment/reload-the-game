@@ -1,4 +1,4 @@
-﻿namespace DumbDogEntertainment
+﻿namespace DumbDogEntertainment.ScriptableObjects
 {
     using UnityEngine;
 
@@ -8,7 +8,7 @@
         public ProjectileType projectileType;
         public Sprite image;
 
-        public int damage;
+        public float damage;
         public float damageRadius;
         public float speed;
         public float rateOfFire;

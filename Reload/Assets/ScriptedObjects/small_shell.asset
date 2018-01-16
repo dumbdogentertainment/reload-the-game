@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ba89513d3f8ec44c968fe463e1621d4, type: 3}
+  m_Script: {fileID: 11500000, guid: ab5029dcdfa98aa419da339e00d081fd, type: 3}
   m_Name: small_shell
   m_EditorClassIdentifier: 
   projectileType: 0
@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 3
   damageRadius: 0.25
   speed: 3
-  rateOfFire: 0.5
+  rateOfFire: 0.25
   costToFire: 1.5
-  targetPosition: {x: 6.1249704, y: 0.315, z: -2.0830908}
+  targetPosition: {x: -0.12527746, y: 0.26526806, z: -2.6265426}

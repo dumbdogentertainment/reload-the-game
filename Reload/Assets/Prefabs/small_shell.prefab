@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeUntilDestroy: 2
-  projectile: {fileID: 11400000, guid: 7187de1869627f344a81e82074dcbd60, type: 2}
+  projectile: {fileID: 11400000, guid: 8dbefc8e0c571764781d3bd0bc5dfee5, type: 2}
   target: {x: 0, y: 0, z: 0}
 --- !u!136 &136075928898351956
 CapsuleCollider:

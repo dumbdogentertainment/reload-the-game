@@ -1,7 +1,8 @@
 ﻿namespace DumbDogEntertainment
 {
-    using System;
     using System.Linq;
+
+    using DumbDogEntertainment.ScriptableObjects;
     using UnityEngine;
 
     public class TowerBehavior : MonoBehaviour
