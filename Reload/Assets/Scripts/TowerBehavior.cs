@@ -38,7 +38,7 @@
             //this.turretTransform.TransformDirection(Vector3.back) * 5,
             //Color.red);
 
-            FireAtTargets(GameObject.FindObjectsOfType<Enemy>());
+            FireAtTargets(GameObject.FindObjectsOfType<EnemyBehavior>());
             Recharge();
         }
 
@@ -56,11 +56,11 @@
             this.energyRechargeCooldown = this.energyRechargeRate;
         }
 
-        private void FireAtTargets(Enemy[] enemies)
+        private void FireAtTargets(EnemyBehavior[] enemies)
         {
             this.fireCooldown -= Time.deltaTime;
 
-            Enemy[] enemiesInRange = enemies
+            EnemyBehavior[] enemiesInRange = enemies
                 .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, 6.5f))
                 .OrderBy(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position))
                 .ToArray();
@@ -71,7 +71,7 @@
             }
 
             // current target is closest enemy in range (3.5, 6.5)
-            Enemy currentTarget = enemiesInRange.FirstOrDefault();
+            EnemyBehavior currentTarget = enemiesInRange.FirstOrDefault();
 
             // look at current target
             Vector3 lookDirection = currentTarget.transform.position - this.turretTransform.position;

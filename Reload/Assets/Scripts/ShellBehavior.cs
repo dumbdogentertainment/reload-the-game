@@ -56,7 +56,7 @@
 
             foreach (Collider collider in colliders)
             {
-                Enemy enemy = collider.GetComponent<Enemy>();
+                EnemyBehavior enemy = collider.GetComponent<EnemyBehavior>();
                 if (null != enemy)
                 {
                     Debug.Log("Hit enemy");

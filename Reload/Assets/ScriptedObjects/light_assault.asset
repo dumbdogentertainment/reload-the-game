@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06739b6beeab0804095b5e96a09b6d6f, type: 3}
+  m_Name: light_assault
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  image: {fileID: 0}
+  health: 25
+  damage: 2
+  speed: 0.025
+  rateOfFire: 0
+  targetPosition: {x: 5, y: 0.315, z: 0}

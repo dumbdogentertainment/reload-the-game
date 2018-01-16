@@ -562,9 +562,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2002364860}
-  - component: {fileID: 2002364859}
   - component: {fileID: 2002364861}
   - component: {fileID: 2002364862}
+  - component: {fileID: 2002364859}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -580,9 +580,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2002364858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a977aaee9ffd7224da6a5af8248a30f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d39542b921e3624087499856ae3259b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  my: {fileID: 11400000, guid: f5d8f1cbe7dba2e47a09b5b2e33f00f1, type: 2}
   target: {x: 0, y: 0, z: 0}
 --- !u!4 &2002364860
 Transform:
