@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 27826788}
   - component: {fileID: 27826787}
   m_Layer: 0
-  m_Name: boosted_energy_image
+  m_Name: overflow_energy_image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300004, guid: e7da02e535dbc7b48b2b9a885c2c2c61, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
@@ -550,13 +550,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df047f1748ddea9408a1a8bb9e2cb6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy: 0
+  regenAmount: 0.05
+  degenAmount: 0.08
+  energizeAmount: 25
   maximumEnergy: 100
-  boostedMaximumEnergy: 150
   speed: 5
   boostedSpeed: 8
-  isCurrentlyBoosted: 0
-  isCurrentlyEnergizing: 0
+  boostAbilityCooldown: 1
+  energizeAbilityCooldown: 1
+  repairAbilityCooldown: 3
+  energy: 0
+  mainReserveEnergy: 0
+  overflowReserveEnergy: 0
+  isCurrentlyBoostingSelf: 0
+  isCurrentlyEnergizingTower: 0
+  isCurrentlyRepairingTower: 0
+  isCurrentlyTakingEnergyFromTower: 0
 --- !u!54 &1353645103
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -40,6 +40,9 @@
         private float energizeAbilityCooldown = 1f;
 
         [SerializeField]
+        private float repairAbilityCooldown = 3f;
+
+        [SerializeField]
         private float energy;
 
         [SerializeField]
@@ -49,10 +52,16 @@
         private float overflowReserveEnergy;
 
         [SerializeField]
-        private bool isCurrentlyBoosted = false;
+        private bool isCurrentlyBoostingSelf = false;
 
         [SerializeField]
-        private bool isCurrentlyEnergizing = false;
+        private bool isCurrentlyEnergizingTower = false;
+
+        [SerializeField]
+        private bool isCurrentlyRepairingTower = false;
+
+        [SerializeField]
+        private bool isCurrentlyTakingEnergyFromTower = false;
 
         private Image energyImage;
         private Image overflowEnergyImage;
@@ -105,7 +114,7 @@
 
         void LateUpdate()
         {
-            Vector3 desiredMovement = (this.isCurrentlyBoosted ? this.boostedSpeed : this.speed) *
+            Vector3 desiredMovement = (this.isCurrentlyBoostingSelf ? this.boostedSpeed : this.speed) *
                 new Vector3(this.horizontalMovement, 0, 0);
 
             this.playerRigidbody.velocity = desiredMovement;
@@ -130,14 +139,20 @@
                 Mathf.Clamp(this.overflowReserveEnergy, 0, this.maximumEnergy) / this.maximumEnergy;
         }
 
-        public void TakeEnergyFromNearestTower()
+        public void EnergizeSelf()
         {
-            Debug.Log("Taking energy from nearest tower ...");
+            if (this.isCurrentlyBoostingSelf)
+            {
+                return;
+            }
+
+            Debug.Log("Giving myself a quick energy boost ...");
+            StartCoroutine(BoostSelf());
         }
 
         public void EnergizeNearestTower()
         {
-            if (this.isCurrentlyEnergizing)
+            if (this.isCurrentlyEnergizingTower)
             {
                 return;
             }
@@ -148,18 +163,24 @@
 
         public void RepairNearestTower()
         {
-            Debug.Log("Repairing nearest tower ...");
-        }
-
-        public void EnergizeSelf()
-        {
-            if (this.isCurrentlyBoosted)
+            if(this.isCurrentlyRepairingTower)
             {
                 return;
             }
 
-            Debug.Log("Giving myself a quick energy boost ...");
-            StartCoroutine(BoostSelf());
+            Debug.Log("Repairing nearest tower ...");
+            StartCoroutine(RepairTower());
+        }
+
+        public void TakeEnergyFromNearestTower()
+        {
+            if (this.isCurrentlyTakingEnergyFromTower)
+            {
+                return;
+            }
+
+            Debug.Log("Taking energy from nearest tower ...");
+            StartCoroutine(TakeEnergy());
         }
 
         /// <summary>
@@ -169,14 +190,14 @@
         /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
         private IEnumerator BoostSelf()
         {
-            this.isCurrentlyBoosted = true;
+            this.isCurrentlyBoostingSelf = true;
 
             float reservesAddition = Mathf.Clamp(this.maximumEnergy - this.energy, 0, this.energizeAmount);
             this.mainReserveEnergy += reservesAddition;
             this.overflowReserveEnergy += (this.energizeAmount - reservesAddition);
 
             yield return new WaitForSeconds(this.boostAbilityCooldown);
-            this.isCurrentlyBoosted = false;
+            this.isCurrentlyBoostingSelf = false;
         }
 
         /// <summary>
@@ -185,7 +206,7 @@
         /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
         private IEnumerator GiveEnergy()
         {
-            this.isCurrentlyEnergizing = true;
+            this.isCurrentlyEnergizingTower = true;
 
             float takeFromReserves = this.energizeAmount;
             if(this.overflowReserveEnergy > 0f)
@@ -201,11 +222,11 @@
                     this.overflowReserveEnergy;
 
                 takeFromReserves = this.energizeAmount - takeFromOverflow;
-                Debug.Log(string.Format(
-                    "cost [{0}] = {1} + {2}",
-                    takeFromOverflow + takeFromReserves,
-                    takeFromOverflow,
-                    takeFromReserves));
+                ////Debug.Log(string.Format(
+                ////    "cost [{0}] = {1} + {2}",
+                ////    takeFromOverflow + takeFromReserves,
+                ////    takeFromOverflow,
+                ////    takeFromReserves));
 
                 this.overflowReserveEnergy -= takeFromOverflow;
             }
@@ -213,7 +234,35 @@
             this.mainReserveEnergy -= takeFromReserves;
 
             yield return new WaitForSeconds(this.energizeAbilityCooldown);
-            this.isCurrentlyEnergizing = false;
+            this.isCurrentlyEnergizingTower = false;
+        }
+
+        /// <summary>
+        /// Repair tower in range
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
+        private IEnumerator RepairTower()
+        {
+            this.isCurrentlyRepairingTower = true;
+
+            yield return new WaitForSeconds(this.repairAbilityCooldown);
+            this.isCurrentlyRepairingTower = false;
+        }
+
+        /// <summary>
+        /// Repair tower in range
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
+        private IEnumerator TakeEnergy()
+        {
+            this.isCurrentlyTakingEnergyFromTower = true;
+
+            float reservesAddition = Mathf.Clamp(this.maximumEnergy - this.energy, 0, this.energizeAmount);
+            this.mainReserveEnergy += reservesAddition;
+            this.overflowReserveEnergy += (this.energizeAmount - reservesAddition);
+
+            yield return new WaitForSeconds(this.energizeAbilityCooldown);
+            this.isCurrentlyTakingEnergyFromTower = false;
         }
     }
 }
