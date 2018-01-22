@@ -24,20 +24,38 @@
 
         #region Properties and variables
 
-        public float energy;
+        public float regenAmount = 0.05f;
+        public float degenAmount = 0.08f;
+        public float energizeAmount = 25f;
+
         public float maximumEnergy = 100f;
-        public float boostedMaximumEnergy = 150f;
-        private Image energyImage;
-        private Image boostedEnergyImage;
 
         public float speed = 5f;
         public float boostedSpeed = 8f;
 
         [SerializeField]
+        private float boostAbilityCooldown = 4f;
+
+        [SerializeField]
+        private float energizeAbilityCooldown = 1f;
+
+        [SerializeField]
+        private float energy;
+
+        [SerializeField]
+        private float mainReserveEnergy;
+
+        [SerializeField]
+        private float overflowReserveEnergy;
+
+        [SerializeField]
         private bool isCurrentlyBoosted = false;
+
         [SerializeField]
         private bool isCurrentlyEnergizing = false;
 
+        private Image energyImage;
+        private Image overflowEnergyImage;
         private Rigidbody playerRigidbody;
         private float horizontalMovement;
 
@@ -51,35 +69,33 @@
                 .Find("EnergyCanvas")
                 .Find("energy_image")
                 .GetComponent<Image>();
-            this.boostedEnergyImage = this.transform
+            this.overflowEnergyImage = this.transform
                 .Find("EnergyCanvas")
-                .Find("boosted_energy_image")
+                .Find("overflow_energy_image")
                 .GetComponent<Image>();
 
-            this.energy = Random.Range(50f, this.maximumEnergy);
+            this.mainReserveEnergy = Random.Range(50f, this.maximumEnergy);
+            this.overflowReserveEnergy = 0f;
         }
 
         void Update()
         {
-            // regen energy
-            this.energy = Mathf.Clamp(this.energy + 0.005f, 0, this.maximumEnergy);
+            // regen main energy
+            this.mainReserveEnergy = Mathf.Clamp(
+                this.mainReserveEnergy + this.regenAmount,
+                0,
+                this.maximumEnergy);
 
-            // degen boosted energy
-            if (this.isCurrentlyBoosted)
-            {
-                this.energy -= 0.03f;
-            }
+            // degen overflow energy
+            this.overflowReserveEnergy = Mathf.Clamp(
+                this.overflowReserveEnergy - this.degenAmount,
+                0,
+                this.maximumEnergy);
+
+            // total energy for use
+            this.energy = this.mainReserveEnergy + this.overflowReserveEnergy;
 
             UpdateEnergyCanvas();
-        }
-
-        void UpdateEnergyCanvas()
-        {
-            this.energyImage.fillAmount = this.isCurrentlyBoosted ?
-                this.energy / this.boostedMaximumEnergy :
-                this.energy / this.maximumEnergy;
-
-            this.boostedEnergyImage.enabled = this.isCurrentlyBoosted;
         }
 
         void FixedUpdate()
@@ -105,6 +121,13 @@
             //}
 
             //Camera.main.transform.LookAt(this.transform);
+        }
+
+        void UpdateEnergyCanvas()
+        {
+            this.energyImage.fillAmount = this.energy / this.maximumEnergy;
+            this.overflowEnergyImage.fillAmount =
+                Mathf.Clamp(this.overflowReserveEnergy, 0, this.maximumEnergy) / this.maximumEnergy;
         }
 
         public void TakeEnergyFromNearestTower()
@@ -143,20 +166,53 @@
         /// Boost self .. gives additional energy (up to a certain maximum)
         /// that degrades over time .. also, grants increased speed.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
         private IEnumerator BoostSelf()
         {
             this.isCurrentlyBoosted = true;
-            this.energy = Mathf.Clamp(this.energy + 25f, 0, this.boostedMaximumEnergy);
-            yield return new WaitForSeconds(4);
+
+            float reservesAddition = Mathf.Clamp(this.maximumEnergy - this.energy, 0, this.energizeAmount);
+            this.mainReserveEnergy += reservesAddition;
+            this.overflowReserveEnergy += (this.energizeAmount - reservesAddition);
+
+            yield return new WaitForSeconds(this.boostAbilityCooldown);
             this.isCurrentlyBoosted = false;
         }
 
+        /// <summary>
+        /// Transfer energy from player's own reserves if enough is available.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> for Unity's StartCoroutine method.</returns>
         private IEnumerator GiveEnergy()
         {
             this.isCurrentlyEnergizing = true;
-            this.energy = Mathf.Clamp(this.energy - 15, 0, this.boostedMaximumEnergy);
-            yield return new WaitForSeconds(2);
+
+            float takeFromReserves = this.energizeAmount;
+            if(this.overflowReserveEnergy > 0f)
+            {
+                // OF: 35   15
+                // $$: 25   25
+                // TK: 25   15
+                // TR: 00   10
+                // $$ = TK + TR
+                // TK = OF >= $$ ? $$ : OF
+                float takeFromOverflow = this.overflowReserveEnergy >= this.energizeAmount ?
+                    this.energizeAmount :
+                    this.overflowReserveEnergy;
+
+                takeFromReserves = this.energizeAmount - takeFromOverflow;
+                Debug.Log(string.Format(
+                    "cost [{0}] = {1} + {2}",
+                    takeFromOverflow + takeFromReserves,
+                    takeFromOverflow,
+                    takeFromReserves));
+
+                this.overflowReserveEnergy -= takeFromOverflow;
+            }
+
+            this.mainReserveEnergy -= takeFromReserves;
+
+            yield return new WaitForSeconds(this.energizeAbilityCooldown);
             this.isCurrentlyEnergizing = false;
         }
     }
