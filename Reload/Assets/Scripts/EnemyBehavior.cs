@@ -9,6 +9,9 @@
         public Vector3 target;
         public float health;
 
+        [SerializeField]
+        private bool IsInvincable = false;
+
         void Start()
         {
             this.health = this.my.health;
@@ -35,6 +38,11 @@
 
         public void DamageMe(float damage)
         {
+            if(this.IsInvincable)
+            {
+                return;
+            }
+
             this.health -= damage;
         }
     }
