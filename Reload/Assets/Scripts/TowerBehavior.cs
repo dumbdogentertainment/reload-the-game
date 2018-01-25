@@ -62,7 +62,7 @@
             this.fireCooldown -= Time.deltaTime;
 
             EnemyBehavior[] enemiesInRange = enemies
-                .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, 6.5f))
+                .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, 15.5f))
                 .OrderBy(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position))
                 .ToArray();
 

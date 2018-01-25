@@ -15,7 +15,7 @@ MonoBehaviour:
   image: {fileID: 0}
   damage: 3
   damageRadius: 0.25
-  speed: 6
-  rateOfFire: 0.25
-  costToFire: 1.5
-  targetPosition: {x: -2.506418, y: 0.26516882, z: 1.1892023}
+  speed: 60
+  rateOfFire: 0.1
+  costToFire: 0.001
+  targetPosition: {x: 3.1528187, y: 0.26510495, z: -3.9540985}

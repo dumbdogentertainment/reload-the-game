@@ -156,6 +156,11 @@ Prefab:
       propertyPath: m_Name
       value: SmallTower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114236155604460242, guid: f08d26ae7c5e55341bad61f5c3163bcc,
+        type: 2}
+      propertyPath: maxEnergy
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08d26ae7c5e55341bad61f5c3163bcc, type: 2}
   m_IsPrefabParent: 0
@@ -471,11 +476,6 @@ Prefab:
     - target: {fileID: 4362379971059240, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114103213517577178, guid: 112a68cae4960ba459faed50d2d64dbb,
-        type: 2}
-      propertyPath: IsInvincable
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}

@@ -54,13 +54,13 @@
         private void TryHit()
         {
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, this.projectile.damageRadius);
-            Debug.Log(this.name + " damaging " + colliders.Length + " enemies.");
 
             foreach (Collider collider in colliders)
             {
                 EnemyBehavior enemy = collider.GetComponent<EnemyBehavior>();
                 if (null != enemy)
                 {
+                    Debug.Log("Damaging enemy.");
                     enemy.DamageMe(this.projectile.damage);
                     Destroy(this.gameObject);
                 }
