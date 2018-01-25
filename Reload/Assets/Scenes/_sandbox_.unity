@@ -242,6 +242,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -404,6 +408,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -454,6 +462,10 @@ Prefab:
     - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_Name
       value: light_assault_enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
@@ -506,6 +518,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -557,6 +573,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -607,6 +627,10 @@ Prefab:
     - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_Name
       value: light_assault_enemy (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
@@ -706,6 +730,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -756,6 +784,10 @@ Prefab:
     - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_Name
       value: light_assault_enemy (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
@@ -900,6 +932,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -997,6 +1033,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -1047,6 +1087,10 @@ Prefab:
     - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_Name
       value: light_assault_enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
@@ -1185,6 +1229,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -1236,6 +1284,10 @@ Prefab:
       propertyPath: m_Name
       value: light_assault_enemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
   m_IsPrefabParent: 0
@@ -1286,6 +1338,10 @@ Prefab:
     - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
       propertyPath: m_Name
       value: light_assault_enemy (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354597411292782, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 112a68cae4960ba459faed50d2d64dbb, type: 2}

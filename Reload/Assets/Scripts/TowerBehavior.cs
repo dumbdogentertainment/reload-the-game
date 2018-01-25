@@ -16,6 +16,7 @@
         public GameObject shellPrefab;
         private Projectile towerProjectile;
         public float fireCooldown;
+        public float maxRange = 12.5f;
 
         Transform turretTransform;
         Transform muzzleTransform;
@@ -62,7 +63,7 @@
             this.fireCooldown -= Time.deltaTime;
 
             EnemyBehavior[] enemiesInRange = enemies
-                .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, 15.5f))
+                .Where(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position).IsBetweenInclusive(3.5f, this.maxRange))
                 .OrderBy(enemy => Vector3.Distance(this.muzzleTransform.position, enemy.transform.position))
                 .ToArray();
 

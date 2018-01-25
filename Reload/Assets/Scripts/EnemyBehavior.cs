@@ -1,5 +1,6 @@
 ﻿namespace DumbDogEntertainment
 {
+    using System.Collections;
     using DumbDogEntertainment.ScriptableObjects;
     using UnityEngine;
 
@@ -10,7 +11,7 @@
         public float health;
 
         [SerializeField]
-        private bool IsInvincable = false;
+        private bool IsInvincible = false;
 
         void Start()
         {
@@ -32,18 +33,41 @@
                 return;
             }
 
-            Vector3 direction = this.target - this.transform.localPosition;
+            Vector3 direction = this.target - this.transform.position;
+
+            if(direction.magnitude <= 0.7f)
+            {
+                StartCoroutine(SelfDestruct());
+            }
+
             this.transform.Translate(direction.normalized * this.my.speed, Space.World);
+        }
+
+        public void SetTarget(GameObject targetGameObject)
+        {
+            if(null == targetGameObject)
+            {
+                return;
+            }
+
+            this.target = targetGameObject.transform.position;
         }
 
         public void DamageMe(float damage)
         {
-            if(this.IsInvincable)
+            if(this.IsInvincible)
             {
                 return;
             }
 
             this.health -= damage;
+        }
+
+        private IEnumerator SelfDestruct()
+        {
+            Debug.Log("Self-destructing ..");
+            yield return new WaitForSeconds(0.01f);
+            this.health = 0f;
         }
     }
 }
