@@ -282,6 +282,8 @@ MonoBehaviour:
   maximumEnergy: 100
   speed: 5
   boostedSpeed: 8
+  energyBar: {fileID: 224767799958117322}
+  overflowEnergyBar: {fileID: 224051940522282992}
   boostAbilityCooldown: 1
   energizeAbilityCooldown: 1
   repairAbilityCooldown: 3

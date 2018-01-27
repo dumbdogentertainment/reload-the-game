@@ -15,6 +15,16 @@
         void Awake()
         {
             Instance = this;
+        }
+
+        void OnApplicationQuit()
+        {
+            Instance = null;
+        }
+        #endregion
+
+        private void Start()
+        {
 
             this.KeyPressedDelegateDictionary = new Dictionary<KeyCode, KeyPressedDelegate>
             {
@@ -24,12 +34,6 @@
                 { KeyCode.W, Player.Instance.EnergizeSelf }
             };
         }
-
-        void OnApplicationQuit()
-        {
-            Instance = null;
-        }
-        #endregion
 
         private void OnGUI()
         {

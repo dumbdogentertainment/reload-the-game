@@ -33,6 +33,17 @@
         public float speed = 5f;
         public float boostedSpeed = 8f;
 
+        private Image energyImage;
+        private Image overflowEnergyImage;
+        private Rigidbody playerRigidbody;
+        private float horizontalMovement;
+
+        [SerializeField]
+        private Transform energyBar;
+
+        [SerializeField]
+        private Transform overflowEnergyBar;
+
         [SerializeField]
         private float boostAbilityCooldown = 4f;
 
@@ -63,25 +74,14 @@
         [SerializeField]
         private bool isCurrentlyTakingEnergyFromTower = false;
 
-        private Image energyImage;
-        private Image overflowEnergyImage;
-        private Rigidbody playerRigidbody;
-        private float horizontalMovement;
-
         #endregion
 
         void Start()
         {
             this.playerRigidbody = GetComponent<Rigidbody>();
 
-            this.energyImage = this.transform
-                .Find("EnergyCanvas")
-                .Find("energy_image")
-                .GetComponent<Image>();
-            this.overflowEnergyImage = this.transform
-                .Find("EnergyCanvas")
-                .Find("overflow_energy_image")
-                .GetComponent<Image>();
+            this.energyImage = this.energyBar.GetComponent<Image>();
+            this.overflowEnergyImage = this.overflowEnergyBar.GetComponent<Image>();
 
             this.mainReserveEnergy = Random.Range(50f, this.maximumEnergy);
             this.overflowReserveEnergy = 0f;
@@ -118,23 +118,11 @@
                 new Vector3(this.horizontalMovement, 0, 0);
 
             this.playerRigidbody.velocity = desiredMovement;
-
-            //Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            //float rayLength;
-
-            //if (groundPlane.Raycast(cameraRay, out rayLength))
-            //{
-            //    var pointToLook = cameraRay.GetPoint(rayLength);
-            //    this.transform.LookAt(new Vector3(pointToLook.x, this.transform.position.y, pointToLook.z));
-            //}
-
-            //Camera.main.transform.LookAt(this.transform);
         }
 
         void UpdateEnergyCanvas()
         {
-            this.energyImage.fillAmount = this.energy / this.maximumEnergy;
+            this.energyImage.fillAmount = this.mainReserveEnergy / this.maximumEnergy;
             this.overflowEnergyImage.fillAmount =
                 Mathf.Clamp(this.overflowReserveEnergy, 0, this.maximumEnergy) / this.maximumEnergy;
         }
@@ -222,11 +210,6 @@
                     this.overflowReserveEnergy;
 
                 takeFromReserves = this.energizeAmount - takeFromOverflow;
-                ////Debug.Log(string.Format(
-                ////    "cost [{0}] = {1} + {2}",
-                ////    takeFromOverflow + takeFromReserves,
-                ////    takeFromOverflow,
-                ////    takeFromReserves));
 
                 this.overflowReserveEnergy -= takeFromOverflow;
             }
