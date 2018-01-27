@@ -67,6 +67,21 @@
         {
             Debug.Log("Self-destructing ..");
             yield return new WaitForSeconds(0.01f);
+
+            Collider[] colliders = Physics.OverlapSphere(this.transform.position, 5f);
+
+            foreach (Collider collider in colliders)
+            {
+                Debug.Log(collider.gameObject.name);
+                TowerBehavior tower = collider.GetComponentInParent<TowerBehavior>();
+                if (null != tower)
+                {
+                    Debug.Log("Damaging tower.");
+                    tower.DamageMe(this.my.damage);
+                    Destroy(this.gameObject);
+                }
+            }
+
             this.health = 0f;
         }
     }

@@ -1,9 +1,11 @@
 ﻿namespace DumbDogEntertainment
 {
+    using System;
     using System.Linq;
 
     using DumbDogEntertainment.ScriptableObjects;
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class TowerBehavior : MonoBehaviour
     {
@@ -13,24 +15,42 @@
         public float energyRechargeAmount = 2f;
         public float energyRechargeCooldown;
 
+        public float maxHealth = 100f;
+        public float currentHealth;
+
         public GameObject shellPrefab;
         private Projectile towerProjectile;
         public float fireCooldown;
         public float maxRange = 12.5f;
 
+        [SerializeField]
         Transform turretTransform;
+
+        [SerializeField]
         Transform muzzleTransform;
+
+        [SerializeField]
+        private Transform energyTransform;
+
+        [SerializeField]
+        private Transform healthTransform;
+
+        private Image energyImage;
+
+        private Image healthImage;
 
         void Awake()
         {
+            this.currentHealth = this.maxHealth;
+
             this.currentEnergy = this.maxEnergy;
             this.energyRechargeCooldown = this.energyRechargeRate;
 
-            this.turretTransform = transform.Find("turret");
-            this.muzzleTransform = this.turretTransform.Find("barrel").Find("muzzle");
-
             this.towerProjectile = this.shellPrefab.GetComponent<ShellBehavior>().projectile;
             this.fireCooldown = this.towerProjectile.rateOfFire;
+
+            this.energyImage = this.energyTransform.GetComponent<Image>();
+            this.healthImage = this.healthTransform.GetComponent<Image>();
         }
 
         void Update()
@@ -40,11 +60,23 @@
             //this.turretTransform.TransformDirection(Vector3.back) * 5,
             //Color.red);
 
+            if(this.currentHealth <= 0)
+            {
+                this.gameObject.SetActive(false);
+            }
+
             FireAtTargets(GameObject.FindObjectsOfType<EnemyBehavior>());
-            Recharge();
+            RechargeEnergy();
+            UpdateCanvas();
         }
 
-        private void Recharge()
+        private void UpdateCanvas()
+        {
+            this.healthImage.fillAmount = this.currentHealth / this.maxHealth;
+            this.energyImage.fillAmount = this.currentEnergy / this.maxEnergy;
+        }
+
+        private void RechargeEnergy()
         {
             this.energyRechargeCooldown -= Time.deltaTime;
 
@@ -53,7 +85,7 @@
                 return;
             }
 
-            this.currentEnergy += this.energyRechargeRate;
+            this.currentEnergy += this.energyRechargeAmount;
             this.currentEnergy = Mathf.Clamp(this.currentEnergy, 0f, this.maxEnergy);
             this.energyRechargeCooldown = this.energyRechargeRate;
         }
@@ -98,6 +130,11 @@
                 this.currentEnergy -= this.towerProjectile.costToFire;
                 this.fireCooldown = this.towerProjectile.rateOfFire;
             }
+        }
+
+        public void DamageMe(float damage)
+        {
+            this.currentHealth -= damage;
         }
     }
 }

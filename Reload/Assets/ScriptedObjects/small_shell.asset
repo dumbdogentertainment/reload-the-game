@@ -17,5 +17,5 @@ MonoBehaviour:
   damageRadius: 0.25
   speed: 60
   rateOfFire: 0.1
-  costToFire: 0.001
-  targetPosition: {x: 3.1528187, y: 0.26510495, z: -3.9540985}
+  costToFire: 0.5
+  targetPosition: {x: 2.974174, y: 0.265743, z: -0.00836741}
