@@ -3,6 +3,7 @@
     using System.Collections;
     using DumbDogEntertainment.ScriptableObjects;
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class EnemyBehavior : MonoBehaviour
     {
@@ -11,11 +12,18 @@
         public float health;
 
         [SerializeField]
+        Transform healthbar;
+
+        private Image healthImage;
+
+        [SerializeField]
         private bool IsInvincible = false;
 
         void Start()
         {
             this.health = this.my.health;
+            this.healthImage = this.healthbar.GetComponent<Image>();
+
             TowerBehavior[] towers = GameObject.FindObjectsOfType<TowerBehavior>();
 
             int randomTowerIndex = Random.Range(0, towers.Length - 1);
@@ -32,6 +40,8 @@
                 Destroy(this.gameObject);
                 return;
             }
+
+            this.healthImage.fillAmount = this.health / this.my.health;
 
             Vector3 direction = this.target - this.transform.position;
 
