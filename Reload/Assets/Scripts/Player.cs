@@ -35,13 +35,14 @@
 
         public TowerBehavior connectedTower;
 
+        public float boostAbilityCooldown = 4f;
+        public float energizeAbilityCooldown = 1f;
+        public float repairAbilityCooldown = 3f;
+
         private Image energyImage;
         private Image overflowEnergyImage;
         private Rigidbody playerRigidbody;
         private float horizontalMovement;
-        private float boostAbilityCooldown = 4f;
-        private float energizeAbilityCooldown = 1f;
-        private float repairAbilityCooldown = 3f;
 
         [SerializeField]
         private Transform energyBar;
@@ -226,6 +227,7 @@
             float speed = this.speed;
             this.speed = 0f;
 
+            StartCoroutine(this.connectedTower.ModifyHealthOverTime(25f, this.repairAbilityCooldown));
             yield return new WaitForSeconds(this.repairAbilityCooldown);
 
             this.speed = speed;

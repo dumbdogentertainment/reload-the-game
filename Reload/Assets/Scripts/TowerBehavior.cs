@@ -1,6 +1,6 @@
 ﻿namespace DumbDogEntertainment
 {
-    using System;
+    using System.Collections;
     using System.Linq;
 
     using DumbDogEntertainment.ScriptableObjects;
@@ -144,9 +144,23 @@
             }
         }
 
-        public void DamageMe(float damage)
+        public void ModifyHealth(float value)
         {
-            this.currentHealth -= damage;
+            this.currentHealth = Mathf.Clamp(this.currentHealth + value, 0, this.maxHealth);
+        }
+
+        public IEnumerator ModifyHealthOverTime(float value, float time)
+        {
+            float amountAdded = 0f;
+
+            float increment = value / (time * 100f);
+
+            while (amountAdded < value)
+            {
+                this.currentHealth = Mathf.Clamp(this.currentHealth + increment, 0, this.maxHealth);
+                amountAdded += increment;
+                yield return null;
+            }
         }
     }
 }

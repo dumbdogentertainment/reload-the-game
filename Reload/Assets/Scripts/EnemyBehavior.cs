@@ -87,7 +87,7 @@
                 if (null != tower)
                 {
                     Debug.Log("Damaging tower.");
-                    tower.DamageMe(this.my.damage);
+                    tower.ModifyHealth(-1 * this.my.damage);
                     Destroy(this.gameObject);
                 }
             }
