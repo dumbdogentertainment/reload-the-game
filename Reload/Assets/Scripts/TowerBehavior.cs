@@ -70,6 +70,18 @@
             UpdateCanvas();
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if(false == other.tag.Equals("Player"))
+            {
+                return;
+            }
+
+            Player.Instance.connectedTower = this.gameObject.GetComponent<TowerBehavior>();
+
+            Debug.Log("Player entered repair zone ..");
+        }
+
         private void UpdateCanvas()
         {
             this.healthImage.fillAmount = this.currentHealth / this.maxHealth;

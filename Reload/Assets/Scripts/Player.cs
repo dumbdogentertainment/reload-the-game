@@ -33,10 +33,15 @@
         public float speed = 5f;
         public float boostedSpeed = 8f;
 
+        public TowerBehavior connectedTower;
+
         private Image energyImage;
         private Image overflowEnergyImage;
         private Rigidbody playerRigidbody;
         private float horizontalMovement;
+        private float boostAbilityCooldown = 4f;
+        private float energizeAbilityCooldown = 1f;
+        private float repairAbilityCooldown = 3f;
 
         [SerializeField]
         private Transform energyBar;
@@ -44,34 +49,25 @@
         [SerializeField]
         private Transform overflowEnergyBar;
 
-        [SerializeField]
-        private float boostAbilityCooldown = 4f;
-
-        [SerializeField]
-        private float energizeAbilityCooldown = 1f;
-
-        [SerializeField]
-        private float repairAbilityCooldown = 3f;
-
-        [SerializeField]
+        //[SerializeField]
         private float energy;
 
-        [SerializeField]
+        //[SerializeField]
         private float mainReserveEnergy;
 
-        [SerializeField]
+        //[SerializeField]
         private float overflowReserveEnergy;
 
-        [SerializeField]
+        //[SerializeField]
         private bool isCurrentlyBoostingSelf = false;
 
-        [SerializeField]
+        //[SerializeField]
         private bool isCurrentlyEnergizingTower = false;
 
-        [SerializeField]
+        //[SerializeField]
         private bool isCurrentlyRepairingTower = false;
 
-        [SerializeField]
+        //[SerializeField]
         private bool isCurrentlyTakingEnergyFromTower = false;
 
         #endregion
@@ -151,7 +147,7 @@
 
         public void RepairNearestTower()
         {
-            if(this.isCurrentlyRepairingTower)
+            if(this.isCurrentlyRepairingTower || null == this.connectedTower)
             {
                 return;
             }
@@ -227,8 +223,12 @@
         private IEnumerator RepairTower()
         {
             this.isCurrentlyRepairingTower = true;
+            float speed = this.speed;
+            this.speed = 0f;
 
             yield return new WaitForSeconds(this.repairAbilityCooldown);
+
+            this.speed = speed;
             this.isCurrentlyRepairingTower = false;
         }
 

@@ -56,6 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4556219295695428}
   - component: {fileID: 114236155604460242}
+  - component: {fileID: 65176194677790270}
   m_Layer: 0
   m_Name: SmallTower
   m_TagString: Untagged
@@ -185,7 +186,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1465476374370000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.87, y: 0, z: 1.81}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4518089148791826}
@@ -385,6 +386,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906146968192056}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65176194677790270
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465476374370000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.5, z: 1.5}
 --- !u!65 &65338085007842498
 BoxCollider:
   m_ObjectHideFlags: 1
