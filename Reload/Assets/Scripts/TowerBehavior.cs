@@ -144,6 +144,11 @@
             }
         }
 
+        public void ModifyEnergy(float value)
+        {
+            this.currentEnergy = Mathf.Clamp(this.currentEnergy + value, 0, this.maxEnergy);
+        }
+
         public void ModifyHealth(float value)
         {
             this.currentHealth = Mathf.Clamp(this.currentHealth + value, 0, this.maxHealth);

@@ -137,7 +137,7 @@
 
         public void EnergizeNearestTower()
         {
-            if (this.isCurrentlyEnergizingTower)
+            if (this.isCurrentlyEnergizingTower || null == this.connectedTower)
             {
                 return;
             }
@@ -159,7 +159,7 @@
 
         public void TakeEnergyFromNearestTower()
         {
-            if (this.isCurrentlyTakingEnergyFromTower)
+            if (this.isCurrentlyTakingEnergyFromTower || null == this.connectedTower)
             {
                 return;
             }
@@ -213,6 +213,7 @@
 
             this.mainReserveEnergy -= takeFromReserves;
 
+            this.connectedTower.ModifyEnergy(this.energizeAmount);
             yield return new WaitForSeconds(this.energizeAbilityCooldown);
             this.isCurrentlyEnergizingTower = false;
         }
