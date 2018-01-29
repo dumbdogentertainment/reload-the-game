@@ -80,7 +80,7 @@
             this.energyImage = this.energyBar.GetComponent<Image>();
             this.overflowEnergyImage = this.overflowEnergyBar.GetComponent<Image>();
 
-            this.mainReserveEnergy = Random.Range(50f, this.maximumEnergy);
+            this.mainReserveEnergy = this.maximumEnergy;
             this.overflowReserveEnergy = 0f;
         }
 

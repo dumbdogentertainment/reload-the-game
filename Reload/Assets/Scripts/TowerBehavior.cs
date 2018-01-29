@@ -126,7 +126,7 @@
             this.turretTransform.rotation = Quaternion.Euler(
                 lookRotation.eulerAngles.x,
                 lookRotation.eulerAngles.y,
-                this.turretTransform.rotation.eulerAngles.z);
+                this.turretTransform.localRotation.eulerAngles.z);
 
             // fire at current target
             if (this.fireCooldown <= 0 && this.currentEnergy >= this.towerProjectile.costToFire)
@@ -137,7 +137,7 @@
                     this.muzzleTransform.rotation);
 
                 Projectile firedProjectile = shellGameObject.GetComponent<ShellBehavior>().projectile;
-                firedProjectile.targetPosition = currentTarget.transform.localPosition;
+                firedProjectile.targetPosition = currentTarget.transform.position;
 
                 this.currentEnergy -= this.towerProjectile.costToFire;
                 this.fireCooldown = this.towerProjectile.rateOfFire;
