@@ -17,4 +17,6 @@ MonoBehaviour:
   damage: 2
   speed: 0.025
   rateOfFire: 0
+  scoreValue: 3
+  damageRadius: 5
   targetPosition: {x: -5, y: 0.315, z: 0}

@@ -71,6 +71,17 @@
             }
 
             this.health -= damage;
+
+            if(this.health <= 0)
+            {
+                GameManager.Instance.ModifyScore(this.my.scoreValue);
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(this.transform.position, this.my.damageRadius);
         }
 
         private IEnumerator SelfDestruct()

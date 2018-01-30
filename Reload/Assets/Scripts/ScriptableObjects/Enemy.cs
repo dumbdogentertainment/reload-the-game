@@ -12,6 +12,8 @@
         public int damage;
         public float speed;
         public float rateOfFire;
+        public int scoreValue;
+        public float damageRadius;
 
         public Vector3 targetPosition;
     }
